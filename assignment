@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#define MAX 1000000
+int stk[MAX];
+int top=-1;
+
+int size();
+void push(int data);
+void pop();
+int tope();
+
+void push(int data)
+{
+  if(size()==MAX) printf("Stack is full");
+  else {  ++top;
+          stk[top]=data;
+
+        }
+}
+void pop()
+{
+if(top==-1) printf("Stack is empty");
+else top--;
+}
+
+int size()
+{
+  return top+1;
+}
+
+
+int main()
+{
+int n,arr[MAX],i,j;
+j=1;
+scanf("%d",&n);
+//arr=(int *)malloc(sizeof(int)*n);
+for(i=0;i<n;i++)
+{
+    scanf("%d",&arr[i]);
+}  
+for(i=0;i<n;i++)
+{
+    printf("%dtop\n",stk[top]);
+    if(top!=-1 && stk[top]==arr[i]) pop();
+    else if(top==-1 || stk[top]<arr[i])
+    {   
+        if(top==-1) 
+        {
+            while(j<arr[i])
+            {
+                push(j);
+                j++;
+            }
+        }
+        else {
+                   while(stk[top]+2!=arr[i]-1)
+                 {
+                   push(stk[top]+1);
+                 } 
+             }
+    }
+    else break;
+}
+    printf("%d\n",i);
+    if(top==-1 && i==n) printf("Valid");
+    else printf("Invalid\n%d",i);
+}
+
